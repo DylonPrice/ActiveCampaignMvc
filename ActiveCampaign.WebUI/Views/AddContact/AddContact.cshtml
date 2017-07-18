@@ -1,0 +1,39 @@
+﻿@model ActiveCampaign.Domain.Entities.Contact
+
+@{
+    ViewBag.Title = "AddContact";
+}
+
+<style type="text/css">
+    .row {
+        padding-top: 5px;
+    }
+</style>
+
+<h2>New Contact</h2>
+
+<div class="container">
+    @using (Html.BeginForm("CreateContact", "AddContact"))
+    {
+        foreach (var property in ViewData.ModelMetadata.Properties)
+        {
+            if (property.PropertyName != "Id")
+            {
+                <div class="form-group">
+                    <label>@(property.DisplayName ?? property.PropertyName)</label>
+                    @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
+                    @Html.ValidationMessage(property.PropertyName)
+                </div>
+            }
+        }
+        <div class="row">
+            <div class="col-md-1 text-right">
+                <button class="btn btn-primary">Save</button>
+            </div>
+            <div class="col-md-1">
+                @Html.ActionLink("Cancel", "Cancel", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    }
+</div>
+

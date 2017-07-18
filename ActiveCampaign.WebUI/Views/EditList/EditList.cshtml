@@ -1,0 +1,41 @@
+﻿@using EyeSoft.Reflection
+@model ActiveCampaign.Domain.Entities.List
+
+@{
+    ViewBag.Title = "EditList";
+    TempData.Add("Id", Model.Id);
+}
+
+<style type="text/css">
+    .row {
+        padding-top: 5px;
+    }
+</style>
+
+<h2>Edit List</h2>
+
+<div class="container">
+    @using (Html.BeginForm("EditList", "EditList", FormMethod.Post))
+    {
+        foreach (var property in ViewData.ModelMetadata.Properties)
+        {
+            if (property.PropertyName != "Id")
+            {
+                <div class="form-group">
+                    <label>@(property.DisplayName ?? property.PropertyName)</label>
+                    @Html.TextBox(property.PropertyName, Model.GetPropertyValue(property.PropertyName), new { @class = "form-control" })
+                    @Html.ValidationMessage(property.PropertyName)
+                </div>
+            }
+        }
+        <div class="row">
+            <div class="col-md-1 text-right">
+                <button class="btn btn-primary">Save</button>
+            </div>
+            <div class="col-md-1">
+                @Html.ActionLink("Cancel", "Cancel", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    }
+</div>
+
