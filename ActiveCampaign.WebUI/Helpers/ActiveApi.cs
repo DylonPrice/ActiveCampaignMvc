@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Web;
 using ActiveCampaign.Domain.Entities;
 using ActiveCampaignNet;
 using Newtonsoft.Json.Linq;
@@ -11,6 +9,8 @@ namespace ActiveCampaign.WebUI.Helpers
 {
     public class ActiveApi
     {
+        // Client comes from ActiveCampaignNet NuGet package
+        // Client instance is created using API Key/URL in development section of ActiveCampaign Website
         ActiveCampaignClient client = new ActiveCampaignClient("0c6dafe512e19cf702825f854dfc89e092cf2ace53c571694f34a1e25c82576b63900542", "https://xanatek.api-us1.com");
 
         public List AddList(List list)
