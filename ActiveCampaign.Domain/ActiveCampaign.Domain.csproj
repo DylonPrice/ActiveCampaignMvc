@@ -83,10 +83,12 @@
     <Compile Include="Abstract\ICampaignRepository.cs" />
     <Compile Include="Abstract\IContactRepository.cs" />
     <Compile Include="Abstract\IListRepository.cs" />
+    <Compile Include="Abstract\IMessageRepository.cs" />
     <Compile Include="Concrete\EFCampaignRepository.cs" />
     <Compile Include="Concrete\EFContactRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFListRepository.cs" />
+    <Compile Include="Concrete\EFMessageRepository.cs" />
     <Compile Include="Entities\Campaign.cs" />
     <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\List.cs" />

@@ -34,6 +34,7 @@ namespace ActiveCampaign.WebUI.Infrastructure
             kernel.Bind<IListRepository>().To<EFListRepository>();
             kernel.Bind<IContactRepository>().To<EFContactRepository>();
             kernel.Bind<ICampaignRepository>().To<EFCampaignRepository>();
+            kernel.Bind<IMessageRepository>().To<EFMessageRepository>();
         }
     }
 }

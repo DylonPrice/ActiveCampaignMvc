@@ -21,7 +21,7 @@ namespace ActiveCampaign.WebUI.Controllers.Main_Controllers
 
         public ActionResult Index()
         {
-            return View("contacts", _contactRepository.Contacts);
+            return View("Contacts", _contactRepository.Contacts);
         }
 
         public ActionResult EditContact(Contact contact)
@@ -43,7 +43,7 @@ namespace ActiveCampaign.WebUI.Controllers.Main_Controllers
                 _contactRepository.SaveContact(contact);
             }
 
-            return View("contacts", _contactRepository.Contacts);
+            return View("Contacts", _contactRepository.Contacts);
         }
 
         public ActionResult DeleteContact(Contact contact)
@@ -54,7 +54,7 @@ namespace ActiveCampaign.WebUI.Controllers.Main_Controllers
                 _contactRepository.DeleteContact(contact.Id);
             }
             
-            return View("contacts", _contactRepository.Contacts);
+            return View("Contacts", _contactRepository.Contacts);
         }
 
         public ActionResult CreateContact()

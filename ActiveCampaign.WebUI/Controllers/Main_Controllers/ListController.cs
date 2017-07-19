@@ -21,7 +21,7 @@ namespace ActiveCampaign.WebUI.Controllers.Main_Controllers
 
         public ActionResult Index()
         {
-            return View("lists", _listRepository.Lists);
+            return View("Lists", _listRepository.Lists);
         }
 
         public ActionResult EditList(List list)
@@ -42,7 +42,7 @@ namespace ActiveCampaign.WebUI.Controllers.Main_Controllers
                 _listRepository.DeleteList(list.Id);
             }
             
-            return View("lists", _listRepository.Lists);
+            return View("Lists", _listRepository.Lists);
         }
 
         public ActionResult GetLists(string id)
@@ -59,7 +59,7 @@ namespace ActiveCampaign.WebUI.Controllers.Main_Controllers
                 _listRepository.SaveList(list);
             }
 
-            return View("lists", _listRepository.Lists);
+            return View("Lists", _listRepository.Lists);
         }
     }
 }

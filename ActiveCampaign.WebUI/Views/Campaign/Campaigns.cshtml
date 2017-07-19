@@ -1,0 +1,55 @@
+﻿@using ActiveCampaign.Domain.Entities;
+@model IEnumerable<Campaign>
+
+@{
+    ViewBag.Title = "Campaigns";
+}
+
+<h2>Campaigns</h2>
+
+<div id="campaigns" , class="container" style="padding-top: 10px">
+    @using (Html.BeginForm("GetCampaigns", "Home"))
+    {
+        <div class="row">
+            <div class="col-md-2 text-right">Campaign Id: </div>
+            <div class="col-md-3">
+                <input type="text" name="campaignId" />
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-default">Search</button>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-2">
+            @Html.ActionLink("View All Campaigns", "GetCampaigns", new { id = "all" }, new { @class = "btn btn-default" })
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table class="table table-striped table-condensed table-bordered">
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Type</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Delete</th>
+                </tr>
+                @foreach (var campaign in Model)
+                {
+                    <tr>
+                        <td class="text-center">@campaign.Id</td>
+                        <td class="text-center">@Html.ActionLink(campaign.Name, "ViewCampaign", campaign)</td>
+                        <td class="text-center">
+                            @Html.ActionLink("Delete", "DeleteCampaign", campaign, new { @class = "btn btn-default" })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="panel-footer">
+            @Html.ActionLink("New Campaign", "CreateCampaign", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+</div>

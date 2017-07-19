@@ -145,6 +145,7 @@
     <Compile Include="Controllers\EditContactController.cs" />
     <Compile Include="Controllers\EditListController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Main_Controllers\CampaignController.cs" />
     <Compile Include="Controllers\Main_Controllers\ContactController.cs" />
     <Compile Include="Controllers\Main_Controllers\ListController.cs" />
     <Compile Include="Global.asax.cs">
@@ -169,8 +170,9 @@
     <Content Include="Views\AddContact\AddContact.cshtml" />
     <Content Include="Views\EditContact\EditContact.cshtml" />
     <Content Include="Views\AddCampaign\AddCampaign.cshtml" />
-    <Content Include="Views\List\lists.cshtml" />
-    <Content Include="Views\Contact\contacts.cshtml" />
+    <Content Include="Views\List\Lists.cshtml" />
+    <Content Include="Views\Contact\Contacts.cshtml" />
+    <Content Include="Views\Campaign\Campaigns.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
