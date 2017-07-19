@@ -142,12 +142,14 @@
     <Compile Include="Controllers\AddCampaignController.cs" />
     <Compile Include="Controllers\AddContactController.cs" />
     <Compile Include="Controllers\AddListController.cs" />
+    <Compile Include="Controllers\Add_Controllers\AddMessageController.cs" />
     <Compile Include="Controllers\EditContactController.cs" />
     <Compile Include="Controllers\EditListController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Main_Controllers\CampaignController.cs" />
     <Compile Include="Controllers\Main_Controllers\ContactController.cs" />
     <Compile Include="Controllers\Main_Controllers\ListController.cs" />
+    <Compile Include="Controllers\Main_Controllers\MessageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -173,6 +175,7 @@
     <Content Include="Views\List\Lists.cshtml" />
     <Content Include="Views\Contact\Contacts.cshtml" />
     <Content Include="Views\Campaign\Campaigns.cshtml" />
+    <Content Include="Views\Message\Messages.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -183,6 +186,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\AddMessage\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ActiveCampaign.Domain\ActiveCampaign.Domain.csproj">

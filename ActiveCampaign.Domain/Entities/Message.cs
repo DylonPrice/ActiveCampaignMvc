@@ -31,7 +31,7 @@ namespace ActiveCampaign.Domain.Entities
         [Required(ErrorMessage = "Please enter a reply to email for your message")]
         public string ReplyTo { get; set; }
 
-        [Required(ErrorMessage = "Please enter a priority number (1 - high, 3 - Medium, 5 - Low) for your message")]
+        [Required(ErrorMessage = "Please enter a priority number (1 - High, 3 - Medium, 5 - Low) for your message")]
         public string Priority { get; set; }
 
         [Display(Name = "Message Body")]
