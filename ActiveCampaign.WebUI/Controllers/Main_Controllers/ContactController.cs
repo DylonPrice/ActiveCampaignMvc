@@ -11,17 +11,17 @@ namespace ActiveCampaign.WebUI.Controllers.Main_Controllers
 {
     public class ContactController : Controller
     {
-        private readonly IContactRepository _contactRepository;
+        private readonly IContactRepository _repository;
         private readonly ActiveApi _activeService = new ActiveApi();
 
-        public ContactController(IContactRepository repository)
+        public ContactController(IContactRepository contactRepo)
         {
-            _contactRepository = repository;
+            _repository = contactRepo;
         }
 
         public ActionResult Index()
         {
-            return View("Contacts", _contactRepository.Contacts);
+            return View("Contacts", _repository.Contacts);
         }
 
         public ActionResult EditContact(Contact contact)
@@ -35,15 +35,15 @@ namespace ActiveCampaign.WebUI.Controllers.Main_Controllers
             {
                 id = Request["contactId"];
             }
-            _contactRepository.ClearContacts();
+            _repository.ClearContacts();
             var contacts = _activeService.GetContacts(id);
 
             foreach (var contact in contacts)
             {
-                _contactRepository.SaveContact(contact);
+                _repository.SaveContact(contact);
             }
 
-            return View("Contacts", _contactRepository.Contacts);
+            return View("Contacts", _repository.Contacts);
         }
 
         public ActionResult DeleteContact(Contact contact)
@@ -51,10 +51,10 @@ namespace ActiveCampaign.WebUI.Controllers.Main_Controllers
             var result = _activeService.DeleteContact(contact);
             if (result)
             {
-                _contactRepository.DeleteContact(contact.Id);
+                _repository.DeleteContact(contact.Id);
             }
             
-            return View("Contacts", _contactRepository.Contacts);
+            return View("Contacts", _repository.Contacts);
         }
 
         public ActionResult CreateContact()

@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-2 text-right">Message Id: </div>
             <div class="col-md-3">
-                <input type="text" name="campaignId" />
+                <input type="text" name="messageId" />
             </div>
             <div class="col-md-1">
                 <button class="btn btn-default">Search</button>
@@ -39,7 +39,7 @@
                 {
                     <tr>
                         <td class="text-center">@message.Id</td>
-                        <td class="text-center">@Html.ActionLink(message.Subject, "ViewMessage", message)</td>
+                        <td class="text-center">@Html.ActionLink(message.Subject, "EditMessage", message)</td>
                         <td class="text-center">@message.ListId</td>
                         <td class="text-center">
                             @Html.ActionLink("Delete", "DeleteMessage", message, new { @class = "btn btn-default" })

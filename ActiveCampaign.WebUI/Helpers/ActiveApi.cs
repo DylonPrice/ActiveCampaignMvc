@@ -11,7 +11,9 @@ namespace ActiveCampaign.WebUI.Helpers
     {
         // Client comes from ActiveCampaignNet NuGet package
         // Client instance is created using API Key/URL in development section of ActiveCampaign Website
-        ActiveCampaignClient client = new ActiveCampaignClient("0c6dafe512e19cf702825f854dfc89e092cf2ace53c571694f34a1e25c82576b63900542", "https://xanatek.api-us1.com");
+        ActiveCampaignClient client = new ActiveCampaignClient("3abff1c87ad096a1de9952120790451170cb2001cb4329cb549cbde3d5f55dbd7358d6d2", "https://xanatek27729.api-us1.com");
+
+        // Lists
 
         public List AddList(List list)
         {
@@ -115,6 +117,8 @@ namespace ActiveCampaign.WebUI.Helpers
             return lists;
         }
 
+        //Contacts
+
         public List<Contact> GetContacts(string contactIds)
         {
             var jResult = new JObject();
@@ -184,7 +188,7 @@ namespace ActiveCampaign.WebUI.Helpers
             return false;
         }
 
-        public Boolean DeleteContact(Contact contact)
+        public bool DeleteContact(Contact contact)
         {
             var result = client.Api("contact_delete", new NameValueCollection
             {
@@ -195,9 +199,112 @@ namespace ActiveCampaign.WebUI.Helpers
             {
                 return true;
             }
-
             return false;
         }
+
+        //Messages
+
+        public Message AddMessage(Message message)
+        {
+            var jResult = new JObject();
+            var result = client.Api("message_add", new NameValueCollection
+            {
+                {"api_output", "json" },
+                {"format", message.Format },
+                {"subject", message.Subject },
+                {"fromemail", message.FromEmail },
+                {"fromname", message.FromName },
+                {"reply2", message.ReplyTo },
+                {"priority", message.Priority },
+                {"charset", "utf-8" },
+                {"encoding", "quoted-printable" },
+                {"htmlconstructor", "editor" },
+                {"html", message.Body },
+                {"textconstructor", "editor" },
+                {"text", message.Body },
+                {"p[" + message.ListId + "]", message.ListId }
+            });
+
+            if (result.IsSuccessful)
+            {
+                jResult = JObject.Parse(result.Data);
+                message.Id = (string) jResult["id"];
+                return message;
+            }
+            return null;
+        }
+
+        public List<Message> GetMessages(string messageIds)
+        {
+            var jResult = new JObject();
+            var messages = new List<Message>();
+            var result = client.Api("message_list", new NameValueCollection
+            {
+                {"api_output", "json"},
+                {"ids", messageIds},
+                {"page", "1"}
+            });
+
+            if (result.IsSuccessful)
+            {
+                jResult = JObject.Parse(result.Data);
+                foreach (var child in jResult)
+                {
+                    if (child.Key == "result_code" || child.Key == "result_message" || child.Key == "result_output")
+                    {
+                        break;
+                    }
+                    var jsonMessage = child.Value;
+                    var message = CreateMessage(jsonMessage);
+                    messages.Add(message);
+                }
+            }
+            return messages;
+        }
+
+        public bool EditMessage(Message message)
+        {
+            var result = client.Api("message_edit", new NameValueCollection
+            {
+                {"api_output", "json" },
+                {"id", message.Id },
+                {"format", message.Format },
+                {"subject", message.Subject },
+                {"fromemail", message.FromEmail },
+                {"fromname", message.FromName },
+                {"reply2", message.ReplyTo },
+                {"priority", message.Priority },
+                {"charset", "utf-8" },
+                {"encoding", "quoted-printable" },
+                {"htmlconstructor", "editor" },
+                {"html", message.Body },
+                {"textconstructor", "editor" },
+                {"text", message.Body },
+                {"p[" + message.ListId + "]", message.ListId },
+            });
+
+            if (result.IsSuccessful)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool DeleteMessage(Message message)
+        {
+            var result = client.Api("message_delete", new NameValueCollection
+            {
+                {"id", message.Id }
+            });
+
+            if (result.IsSuccessful)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        // Campaigns
 
         public Campaign AddCampaign(Campaign campaign)
         {
@@ -250,6 +357,31 @@ namespace ActiveCampaign.WebUI.Helpers
             };
 
             return contact;
+        }
+
+        private Message CreateMessage(JToken messageObject)
+        {
+            var message = new Message
+            {
+                Id = (string) messageObject["id"],
+                Format = (string) messageObject["format"],
+                Subject = (string) messageObject["subject"],
+                FromEmail = (string) messageObject["fromemail"],
+                FromName = (string) messageObject["fromname"],
+                ReplyTo = (string) messageObject["reply2"],
+                Priority = (string) messageObject["priority"]
+            };
+
+            if (message.Format == "text")
+            {
+                message.Body = (string) messageObject["text"];
+            }
+            if (message.Format == "html")
+            {
+                message.Body = (string) messageObject["html"];
+            }
+
+            return message;
         }
     }
 }

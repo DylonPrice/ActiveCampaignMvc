@@ -11,8 +11,8 @@ namespace ActiveCampaign.WebUI.Controllers
 {
     public class EditContactController : Controller
     {
-        private IContactRepository _repository;
-        private ActiveApi _activeService = new ActiveApi();
+        private readonly IContactRepository _repository;
+        private readonly ActiveApi _activeService = new ActiveApi();
 
         public EditContactController(IContactRepository contactRepository)
         {
