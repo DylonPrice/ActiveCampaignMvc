@@ -12,8 +12,7 @@
     {
         <div class="form-group">
             <label class="text-right">@(property.DisplayName ?? property.PropertyName)</label>
-            <br/>
-            @Html.DisplayText(property.PropertyName)
+            @Html.TextBox(property.PropertyName, Model.GetPropertyValue(property.PropertyName), new { @class = "disabled form-control", @readonly = "readonly" })
         </div>
     }
     <div class="col-md-1">
