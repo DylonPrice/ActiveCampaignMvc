@@ -14,7 +14,7 @@ namespace ActiveCampaign.WebUI.Controllers
             return View("ViewCampaign", campaign);
         }
 
-        public ActionResult back()
+        public ActionResult Back()
         {
             return RedirectToAction("Index", "Campaign");
         }
