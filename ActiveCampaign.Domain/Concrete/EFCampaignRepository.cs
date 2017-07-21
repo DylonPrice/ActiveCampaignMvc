@@ -19,7 +19,6 @@ namespace ActiveCampaign.Domain.Concrete
                 dbEntry.Id = campaign.Id;
                 dbEntry.Name = campaign.Name;
                 dbEntry.Type = campaign.Type;
-                dbEntry.IsPublic = campaign.IsPublic;
                 dbEntry.SendDate = campaign.SendDate;
                 dbEntry.Status = campaign.Status;
             }

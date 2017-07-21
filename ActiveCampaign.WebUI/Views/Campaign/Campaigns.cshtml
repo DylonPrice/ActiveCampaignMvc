@@ -41,6 +41,8 @@
                     <tr>
                         <td class="text-center">@campaign.Id</td>
                         <td class="text-center">@Html.ActionLink(campaign.Name, "ViewCampaign", campaign)</td>
+                        <td class="text-center">@campaign.Type</td>
+                        <td class="text-center">@campaign.Status</td>
                         <td class="text-center">
                             @Html.ActionLink("Delete", "DeleteCampaign", campaign, new { @class = "btn btn-default" })
                         </td>

@@ -1,0 +1,22 @@
+﻿@using EyeSoft.Reflection;
+@model ActiveCampaign.Domain.Entities.Campaign
+
+@{
+    ViewBag.Title = "ViewCampaign";
+}
+
+<h2>View Campaign</h2>
+
+<div class="container">
+    @foreach (var property in ViewData.ModelMetadata.Properties)
+    {
+        <div class="form-group">
+            <label class="text-right">@(property.DisplayName ?? property.PropertyName)</label>
+            <br/>
+            @Html.DisplayText(property.PropertyName)
+        </div>
+    }
+    <div class="col-md-1">
+        @Html.ActionLink("Back", "back", null, new { @class = "btn btn-default"})
+    </div>
+</div>

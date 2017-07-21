@@ -151,6 +151,7 @@
     <Compile Include="Controllers\Main_Controllers\ContactController.cs" />
     <Compile Include="Controllers\Main_Controllers\ListController.cs" />
     <Compile Include="Controllers\Main_Controllers\MessageController.cs" />
+    <Compile Include="Controllers\ViewCampaignController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -179,6 +180,7 @@
     <Content Include="Views\Message\Messages.cshtml" />
     <Content Include="Views\AddMessage\AddMessage.cshtml" />
     <Content Include="Views\EditMessage\EditMessage.cshtml" />
+    <Content Include="Views\ViewCampaign\ViewCampaign.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

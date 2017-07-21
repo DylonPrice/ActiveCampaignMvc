@@ -20,6 +20,10 @@
                 </div>
             }
         }
+        <div class="form-group">
+            <label>Visible to Public 1 = yes, 0 = no</label>
+            @Html.TextBox("isPublic", "0", new { @class = "form-control"})
+        </div>
         <div class="row">
             <div class="col-md-1 text-right">
                 <button class="btn btn-primary">Save</button>

@@ -28,7 +28,8 @@ namespace ActiveCampaign.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                campaign = _activeService.AddCampaign(campaign);
+                var isPublic = Request["isPublic"];
+                campaign = _activeService.AddCampaign(campaign, isPublic);
                 _repository.SaveCampaign(campaign);
                 return RedirectToAction("Index", "Home");
             }

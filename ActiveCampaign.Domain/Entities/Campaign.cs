@@ -24,10 +24,6 @@ namespace ActiveCampaign.Domain.Entities
         [Required(ErrorMessage = "Please enter a send date for the campaign")]
         public DateTime SendDate { get; set; }
 
-        [Display(Name = "Visible to Public - 1 yes, 0 No")]
-        [Required(ErrorMessage = "Please enter 1 for visible or 0 for not visible")]
-        public string IsPublic { get; set; }
-
         [Display(Name = "Link Tracking")]
         [Required(ErrorMessage = "Please enter the type of links to track, or all to track all links")]
         public string LinkTracking { get; set; }

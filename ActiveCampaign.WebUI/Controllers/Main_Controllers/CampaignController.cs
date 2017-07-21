@@ -4,23 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ActiveCampaign.Domain.Abstract;
+using ActiveCampaign.Domain.Entities;
 using ActiveCampaign.WebUI.Helpers;
 
 namespace ActiveCampaign.WebUI.Controllers.Main_Controllers
 {
     public class CampaignController : Controller
     {
-        private readonly ICampaignRepository _campaignRepository;
+        private readonly ICampaignRepository _repository;
         private readonly ActiveApi _activeService = new ActiveApi();
 
-        public CampaignController(ICampaignRepository repository)
+        public CampaignController(ICampaignRepository campaignRepo)
         {
-            _campaignRepository = repository;
+            _repository = campaignRepo;
         }
 
         public ActionResult Index()
         {
-            return View("campaigns", _campaignRepository.Campaigns);
+            return View("campaigns", _repository.Campaigns);
         }
 
         public ActionResult CreateCampaign()
@@ -30,17 +31,36 @@ namespace ActiveCampaign.WebUI.Controllers.Main_Controllers
 
         public ActionResult GetCampaigns(string id)
         {
-            return View("Campaigns");
+            if (Request["campaignId"] != null)
+            {
+                id = Request["campaignId"];
+            }
+            _repository.ClearCampaigns();
+            var campaigns = _activeService.GetCampaigns(id);
+
+            foreach (var campaign in campaigns)
+            {
+                _repository.SaveCampaign(campaign);
+            }
+
+            return View("Campaigns", _repository.Campaigns);
         }
 
-        public ActionResult DeleteCampaign(string id)
+        public ActionResult DeleteCampaign(Campaign campaign)
         {
-            return View("Campaigns");
+            var result = _activeService.DeleteCampaign(campaign);
+
+            if (result)
+            {
+                _repository.DeleteCampaign(campaign.Id);
+            }
+
+            return View("Campaigns", _repository.Campaigns);
         }
 
-        public ActionResult ViewCampaign(string id)
+        public ActionResult ViewCampaign(Campaign campaign)
         {
-            return View("Campaigns");
+            return RedirectToAction("Index", "ViewCampaign", campaign);
         }
     }
 }

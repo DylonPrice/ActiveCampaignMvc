@@ -306,7 +306,7 @@ namespace ActiveCampaign.WebUI.Helpers
 
         // Campaigns
 
-        public Campaign AddCampaign(Campaign campaign)
+        public Campaign AddCampaign(Campaign campaign, string isPublic)
         {
             var jResult = new JObject();
             var result = client.Api("campaign_create", new NameValueCollection
@@ -315,7 +315,7 @@ namespace ActiveCampaign.WebUI.Helpers
                 {"name", campaign.Name },
                 {"sdate", campaign.SendDate.ToString("s") },
                 {"status", campaign.Status },
-                {"public", campaign.IsPublic },
+                {"public", isPublic },
                 {"tracklinks", campaign.LinkTracking },
                 {"m[" + campaign.MessageId + "]", "100" },
                 {"p[" + campaign.ListIds + "]", campaign.ListIds }
@@ -328,6 +328,65 @@ namespace ActiveCampaign.WebUI.Helpers
                 return campaign;
             }
             return null;
+        }
+
+        public bool DeleteCampaign(Campaign campaign)
+        {
+            var result = client.Api("campaign_delete", new NameValueCollection
+            {
+                {"id", campaign.Id }
+            });
+
+            if (result.IsSuccessful)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public List<Campaign> GetCampaigns(string campaignIds)
+        {
+            var jResult = new JObject();
+            var campaigns = new List<Campaign>();
+            var result = client.Api("campaign_list", new NameValueCollection
+            {
+                {"api_output", "json" },
+                { "ids", campaignIds },
+                {"full", "1" }
+            });
+
+            if (result.IsSuccessful)
+            {
+                jResult = JObject.Parse(result.Data);
+                foreach (var child in jResult)
+                {
+                    if (child.Key == "result_code" || child.Key == "result_message" || child.Key == "result_output")
+                    {
+                        break;
+                    }
+                    var jsonCampaign = child.Value;
+                    var campaign = CreateCampaign(jsonCampaign);
+                    campaigns.Add(campaign);
+                }
+            }
+            return campaigns;
+        }
+
+        private Campaign CreateCampaign(JToken campaignObject)
+        {
+            var campaign = new Campaign
+            {
+                Id = (string) campaignObject["id"],
+                Name = (string) campaignObject["name"],
+                Type = (string) campaignObject["type"],
+                Status = (string) campaignObject["status"],
+                SendDate = (DateTime) campaignObject["sdate"],
+                ListIds = (string) campaignObject["listslist"],
+                LinkTracking = (string) campaignObject["tracklinks"],
+                MessageId = (string) campaignObject["messageslist"],
+            };
+
+            return campaign;
         }
 
         private List CreateList(JToken listObject)
