@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using ActiveCampaign.Domain.Abstract;
 using ActiveCampaign.Domain.Entities;
 using ActiveCampaign.WebUI.Helpers;
 
-namespace ActiveCampaign.WebUI.Controllers
+namespace ActiveCampaign.WebUI.Controllers.Add_Controllers
 {
     public class AddCampaignController : Controller
     {

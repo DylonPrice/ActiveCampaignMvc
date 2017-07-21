@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using ActiveCampaign.Domain.Abstract;
 using ActiveCampaign.Domain.Entities;
 using ActiveCampaign.WebUI.Helpers;
 
-namespace ActiveCampaign.WebUI.Controllers
+namespace ActiveCampaign.WebUI.Controllers.Edit_Controllers
 {
     public class EditContactController : Controller
     {
@@ -28,7 +24,7 @@ namespace ActiveCampaign.WebUI.Controllers
         [HttpPost]
         public ActionResult EditContact(Contact contact)
         {
-            contact.Id = (string) TempData["Id"];
+            contact.Id = (string)TempData["Id"];
             TempData.Clear();
             if (ModelState.IsValid)
             {

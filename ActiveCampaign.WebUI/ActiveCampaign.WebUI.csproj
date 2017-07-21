@@ -139,16 +139,16 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AddCampaignController.cs" />
-    <Compile Include="Controllers\AddContactController.cs" />
-    <Compile Include="Controllers\AddListController.cs" />
+    <Compile Include="Controllers\Add_Controllers\AddCampaignController.cs" />
+    <Compile Include="Controllers\Add_Controllers\AddContactController.cs" />
+    <Compile Include="Controllers\Add_Controllers\AddListController.cs" />
     <Compile Include="Controllers\Add_Controllers\AddMessageController.cs" />
-    <Compile Include="Controllers\EditContactController.cs" />
-    <Compile Include="Controllers\EditListController.cs" />
+    <Compile Include="Controllers\Edit_Controllers\EditContactController.cs" />
+    <Compile Include="Controllers\Edit_Controllers\EditListController.cs" />
     <Compile Include="Controllers\Edit_Controllers\EditMessageController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Main_Controllers\CampaignController.cs" />
     <Compile Include="Controllers\Main_Controllers\ContactController.cs" />
+    <Compile Include="Controllers\Main_Controllers\HomeController.cs" />
     <Compile Include="Controllers\Main_Controllers\ListController.cs" />
     <Compile Include="Controllers\Main_Controllers\MessageController.cs" />
     <Compile Include="Controllers\ViewCampaignController.cs" />
