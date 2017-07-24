@@ -27,14 +27,14 @@ namespace ActiveCampaign.WebUI.Controllers.Add_Controllers
             {
                 list = _activeService.AddList(list);
                 _repository.SaveList(list);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "List");
             }
             return View("AddList");
         }
 
         public ActionResult Cancel()
         {
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "List");
         }
     }
 }

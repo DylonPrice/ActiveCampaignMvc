@@ -27,14 +27,14 @@ namespace ActiveCampaign.WebUI.Controllers.Add_Controllers
                 var isPublic = Request["isPublic"];
                 campaign = _activeService.AddCampaign(campaign, isPublic);
                 _repository.SaveCampaign(campaign);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Campaign");
             }
             return View("AddCampaign");
         }
 
         public ActionResult Cancel()
         {
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Campaign");
         }
     }
 }

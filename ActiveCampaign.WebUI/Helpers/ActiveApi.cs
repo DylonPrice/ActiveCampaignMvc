@@ -255,7 +255,8 @@ namespace ActiveCampaign.WebUI.Helpers
                         break;
                     }
                     var jsonMessage = child.Value;
-                    var message = CreateMessage(jsonMessage);
+                    var messageId = (string) jsonMessage["id"];
+                    var message = CreateMessage(messageId);
                     messages.Add(message);
                 }
             }
@@ -418,28 +419,28 @@ namespace ActiveCampaign.WebUI.Helpers
             return contact;
         }
 
-        private Message CreateMessage(JToken messageObject)
+        private Message CreateMessage(string messageId)
         {
+            var jResult = new JObject();
+            var result = client.Api("message_view", new NameValueCollection
+            {
+                {"api_output", "json" },
+                {"id", messageId }
+            });
+            jResult = JObject.Parse(result.Data);
+
             var message = new Message
             {
-                Id = (string) messageObject["id"],
-                Format = (string) messageObject["format"],
-                Subject = (string) messageObject["subject"],
-                FromEmail = (string) messageObject["fromemail"],
-                FromName = (string) messageObject["fromname"],
-                ReplyTo = (string) messageObject["reply2"],
-                Priority = (string) messageObject["priority"]
+                Id = messageId,
+                Subject = (string) jResult["subject"],
+                Body = (string) jResult["text"],
+                Format = (string) jResult["format"],
+                FromEmail = (string) jResult["fromemail"],
+                FromName = (string) jResult["fromname"],
+                ListId = (string) jResult["listslist"],
+                Priority = (string) jResult["priority"],
+                ReplyTo = (string) jResult["reply2"]
             };
-
-            if (message.Format == "text")
-            {
-                message.Body = (string) messageObject["text"];
-            }
-            if (message.Format == "html")
-            {
-                message.Body = (string) messageObject["html"];
-            }
-
             return message;
         }
     }

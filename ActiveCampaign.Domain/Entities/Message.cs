@@ -30,6 +30,7 @@ namespace ActiveCampaign.Domain.Entities
 
         [Display(Name = "Message Body")]
         [Required(ErrorMessage = "Please enter the body of your email. Must be either HTML or plain text")]
+        [MaxLength]
         public string Body { get; set; }
 
         [Display(Name = "List Id")]
